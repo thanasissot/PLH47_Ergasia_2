@@ -52,13 +52,13 @@ public class Ypo3Server {
                     System.exit(1);
                 }
             } catch (IOException e) {
-                System.err.println("Could not listen on port: 10007");
+                System.err.println("Could not listen on port: " + PORT);
                 System.exit(1);
             } finally {
                 try {
                     serverSocket.close();
                 } catch (IOException e) {
-                    System.err.println("Could not close port: 10007");
+                    System.err.println("Could not close port: " + PORT);
                     System.exit(1);
                 }
             }
@@ -93,7 +93,7 @@ public class Ypo3Server {
                     // clients input used to get OPERATOR and VALUE
                     String[] inputs = dataInputStream.readUTF().split(" ");
                     String operation = inputs[0];
-                    int value = Integer.parseInt(inputs[1]);;
+                    int value = Integer.parseInt(inputs[1]);
 
                     // helper method for handling ADD/SUB and value input cases
                     handleInput(operation, value, out);
