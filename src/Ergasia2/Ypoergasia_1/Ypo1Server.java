@@ -39,12 +39,6 @@ public class Ypo1Server  {
         String inputLine;
 
         while (true) {
-//            System.out.println("-----");
-//            for (int a : table.keySet()){
-//                System.out.println(a + " " + table.get(a));
-//            }
-//            System.out.println("-----");
-
             out.println("\nEnter 2 or 3 integer comma-separated values like \"A, B, C\" or \"A,B\" :");
             inputLine = in.readLine();
 
@@ -130,7 +124,7 @@ public class Ypo1Server  {
         return result;
     }
 
-    //
+    // helper method to validate integer inputs
     public static void clearInputs(List<Integer> inputs) throws Exception {
         switch (inputs.size()) {
             case 1:

@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Client extends Thread{
-    private static int clientNo = 1;
+public class Ypo3Client extends Thread{
+    private final int clientNo;
     private static final String serverHostName = "127.0.0.1";
     private static Random rand = new Random();
     private String operation;
     private List<Integer> portList;
-    private int client;
 
-    public Client(String operation, List<Integer> portList) {
+
+    public Ypo3Client(String operation, List<Integer> portList, int clientNo) {
         this.operation = operation;
         this.portList = portList;
-        this.client = clientNo++;
+        this.clientNo = clientNo;
     }
 
     @Override
@@ -80,7 +80,8 @@ public class Client extends Thread{
             }
         }
     }
-
+    // helper method returns random index of List
+    // used to create a pseudo-random next choice of what port to connect to
     public int randomIndex (List<Integer> intList) throws Exception {
         if (intList != null) {
             int size = intList.size();
@@ -88,15 +89,6 @@ public class Client extends Thread{
         }
 
         throw new Exception("Empty PORT List");
-    }
-
-    public static void main(String[] args) throws IOException {
-        List<Integer> arr = new ArrayList<>();
-        arr.add(20007);
-        arr.add(20008);
-        arr.add(20009);
-
-        new Client("ADD", arr).start();
     }
 
 }

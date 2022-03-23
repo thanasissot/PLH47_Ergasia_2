@@ -1,7 +1,5 @@
 package Ergasia2.Ypoergasia_4;
 
-import exercise2_2.yp4.ServerOperation;
-
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -16,7 +14,7 @@ public class HashTableServer extends UnicastRemoteObject implements HashTableOpe
         table = new Hashtable<>((int)Math.pow(2, 20));
     }
 
-    @Override
+    // put or update/replace key/value pair
     public boolean upsert(int key, int value) throws RemoteException{
         try {
             if (table.containsKey(key)){
@@ -34,13 +32,13 @@ public class HashTableServer extends UnicastRemoteObject implements HashTableOpe
         return false;
     }
 
-    @Override
+    // delete key if exists, otherwise nothing happends
     public boolean delete(int key) throws RemoteException{
         table.remove(key);
         return true;
     }
 
-    @Override
+    // returns value of key if exists otherwise 0
     public int getKeyValue(int key) throws RemoteException{
         if (table.containsKey(key)){
             return table.get(key);
@@ -49,7 +47,7 @@ public class HashTableServer extends UnicastRemoteObject implements HashTableOpe
         return 0;
     }
 
-
+    //
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(11234);

@@ -8,11 +8,13 @@ import java.util.Random;
 public class Ypo3Server {
     protected Socket clientSocket;
     private int STORAGE;
+    private int serverNo;
 
     // constructor, creates a Server that listens to 2 PORT
     // creates 2 new instances of inner class OpenSocket and AcceptConnection which implement Runnable interface
     // used for handling the logic of the server
-    public Ypo3Server(int PORT1, int PORT2){
+    public Ypo3Server(int PORT1, int PORT2, int serverNo){
+        this.serverNo = serverNo;
         this.STORAGE = new Random().nextInt(1000) + 1;
 
         OpenSocket socket_a = new OpenSocket(PORT1);
@@ -61,12 +63,16 @@ public class Ypo3Server {
                     System.err.println("Could not close port: " + PORT);
                     System.exit(1);
                 }
+                catch (Exception e) {
+                    System.err.println(e.getMessage() + " | PORT :" + PORT);
+                    System.exit(1);
+                }
             }
         }
     }
 
     // every client connected is handled here
-    // privedes input and output of client and handles the value sent according to OPERATOR String
+    // provides input and output of client and handles the value sent according to OPERATOR String
     public class AcceptConnection extends Thread{
         protected Socket clientSocket;
 
@@ -120,6 +126,7 @@ public class Ypo3Server {
         if (!(operation.equals("ADD") || operation.equals("SUB"))
                 || (value < 10 || value > 100)) {
             out.println("Something went wrong. Connection terminating.");
+            return;
         }
 
         if (operation.equals("ADD")) {
@@ -128,7 +135,7 @@ public class Ypo3Server {
             }
             else {
                 STORAGE += value;
-                out.println("Operation confirmed. STORAGE is " + STORAGE);
+                out.println("Operation confirmed. ServerNo" + serverNo + " STORAGE is " + STORAGE);
             }
         }
         else {

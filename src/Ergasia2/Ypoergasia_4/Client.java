@@ -1,8 +1,5 @@
 package Ergasia2.Ypoergasia_4;
 
-import exercise2_2.yp4.ClientOperation;
-import exercise2_2.yp4.MenuHandler;
-
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -10,7 +7,7 @@ import java.rmi.RemoteException;
 
 /**
  * @author alexandros
- * extended implementation by Sotiroglou Athanasios
+ * EDITED by Sotiroglou Athanasios for GE2 - PLI47 2021-22
  */
 
 public class Client {
